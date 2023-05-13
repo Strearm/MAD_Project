@@ -12,12 +12,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.mad_project.navigation.*
+import com.example.mad_project.widgets.HomeTopAppBar
 
 @Composable
 fun HomeScreen(navController: NavController) {
     Column(modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
+        HomeTopAppBar() {
+            
+        }
         Text(
             modifier = Modifier
                 .padding(top = 150.dp)
