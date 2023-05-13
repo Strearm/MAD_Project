@@ -4,7 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 
 @Composable
-fun LearningScreen(navController: NavController)
+fun DetailLearningScreen(navController: NavController, id:Long?)
 {
+    id?.let {
 
+    }
 }

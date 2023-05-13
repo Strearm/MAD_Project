@@ -5,31 +5,33 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.mad_project.navigation.*
+import com.example.mad_project.navigation.LEARNING_GRAPH_ROUTE
+import com.example.mad_project.navigation.RELAX_GRAPH_ROUTE
+import com.example.mad_project.navigation.Screen
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun RelaxScreen(navController: NavController)
+{
     Column(modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             modifier = Modifier
-                .padding(top = 150.dp)
-                .clickable { navController.navigate(RELAX_GRAPH_ROUTE) },
-            text = "RELAX"
+                .padding(top = 150.dp),
+            text = "WELCOME TO RELAX"
         )
 
         Text(
             modifier = Modifier
                 .padding(top = 150.dp)
-                .clickable { navController.navigate(LEARNING_GRAPH_ROUTE) },
-            text = "LEARNING"
+                .clickable { navController.navigate(Screen.Detail_Relax.passId("1")) },
+            text = "RELAX Detail"
         )
     }
 }
