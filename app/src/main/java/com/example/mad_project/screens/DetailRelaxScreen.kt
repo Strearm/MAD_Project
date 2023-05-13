@@ -7,13 +7,12 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun DetailRelaxScreen(navController: NavController
-//                      , id:Long?
+fun DetailRelaxScreen(navController: NavController, id:Long?
 )
 {
-    // id?.let {
+     id?.let {
         Column() {
-            Text(text = "Hallo")
+            Text(text = "Welcome to Detail Relax")
         }
-   // }
+    }
 }

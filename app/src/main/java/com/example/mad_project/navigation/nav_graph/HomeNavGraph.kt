@@ -1,6 +1,5 @@
 package com.example.mad_project.navigation.nav_graph
 
-
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -8,9 +7,6 @@ import androidx.navigation.navigation
 import com.example.mad_project.navigation.HOME_GRAPH_ROUTE
 import com.example.mad_project.navigation.Screen
 import com.example.mad_project.screens.HomeScreen
-import com.example.mad_project.screens.LearningScreen
-import com.example.mad_project.screens.RelaxScreen
-import com.example.mad_project.screens.TimerScreen
 
 fun NavGraphBuilder.homeNavGraph(
     navController: NavHostController

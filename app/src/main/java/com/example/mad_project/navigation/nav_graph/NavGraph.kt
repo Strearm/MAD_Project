@@ -17,5 +17,6 @@ fun SetupNavGraph(
     ){
         homeNavGraph(navController = navController)
         relaxNavGraph(navController = navController)
+        learningNavGraph(navController = navController)
     }
 }

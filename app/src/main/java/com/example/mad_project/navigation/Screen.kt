@@ -18,7 +18,7 @@ sealed class Screen(val route: String) {
         }
     }
     object Relax: Screen(route = "relax_screen")
-    object Detail_Relax : Screen(route = "detail_relax_screen/${relaxId}") {
+    object Detail_Relax : Screen(route = "detail_relax_screen/{$relaxId}") {
         fun passId(id: String): String {
             return this.route.replace(oldValue = "{$relaxId}", newValue = id)
         }

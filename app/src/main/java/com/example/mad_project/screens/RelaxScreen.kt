@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.mad_project.navigation.HOME_GRAPH_ROUTE
 import com.example.mad_project.navigation.LEARNING_GRAPH_ROUTE
 import com.example.mad_project.navigation.RELAX_GRAPH_ROUTE
 import com.example.mad_project.navigation.Screen
@@ -32,6 +33,15 @@ fun RelaxScreen(navController: NavController)
                 .padding(top = 150.dp)
                 .clickable { navController.navigate(route = Screen.Detail_Relax.passId(id = "1")) },
             text = "RELAX Detail"
+        )
+
+        Text(
+            modifier = Modifier
+                .padding(top = 150.dp)
+                .clickable { navController.navigate(HOME_GRAPH_ROUTE) {
+                    popUpTo(HOME_GRAPH_ROUTE)
+                } },
+            text = "Go BACK"
         )
     }
 }

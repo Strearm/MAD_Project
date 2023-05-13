@@ -24,8 +24,10 @@ fun NavGraphBuilder.relaxNavGraph(
         composable(
             route = Screen.Detail_Relax.route,
             arguments = listOf(navArgument(name = relaxId) {type = NavType.LongType})
-        ) { DetailRelaxScreen(
-                navController = navController)
+        ) {backStackEntry ->
+            DetailRelaxScreen(
+                navController = navController,
+                id = backStackEntry.arguments?.getLong(relaxId))
         }
     }
 }
