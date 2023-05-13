@@ -24,23 +24,5 @@ fun NavGraphBuilder.homeNavGraph(
         ) {
             HomeScreen(navController = navController)
         }
-
-        composable(
-            route = Screen.Learning.route
-        ) {
-            LearningScreen(navController = navController)
-        }
-
-       /* composable(
-            route = Screen.Relax.route
-        ) {
-            RelaxScreen(navController = navController)
-        }*/
-
-        composable(
-            route = Screen.Timer.route
-        ) {
-            TimerScreen(navController = navController)
-        }
     }
 }

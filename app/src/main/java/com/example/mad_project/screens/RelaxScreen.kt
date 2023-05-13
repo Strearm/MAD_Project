@@ -30,7 +30,7 @@ fun RelaxScreen(navController: NavController)
         Text(
             modifier = Modifier
                 .padding(top = 150.dp)
-                .clickable { navController.navigate(Screen.Detail_Relax.passId("1")) },
+                .clickable { navController.navigate(route = Screen.Detail_Relax.passId(id = "1")) },
             text = "RELAX Detail"
         )
     }

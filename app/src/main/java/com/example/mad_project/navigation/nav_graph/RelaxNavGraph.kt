@@ -6,6 +6,7 @@ import com.example.mad_project.navigation.RELAX_GRAPH_ROUTE
 import com.example.mad_project.navigation.Screen
 import com.example.mad_project.navigation.relaxId
 import com.example.mad_project.screens.DetailRelaxScreen
+import com.example.mad_project.screens.RelaxScreen
 
 fun NavGraphBuilder.relaxNavGraph(
     navController: NavHostController
@@ -15,12 +16,16 @@ fun NavGraphBuilder.relaxNavGraph(
         route = RELAX_GRAPH_ROUTE
     ){
         composable(
+            route = Screen.Relax.route
+        ) {
+            RelaxScreen(navController = navController)
+        }
+        
+        composable(
             route = Screen.Detail_Relax.route,
             arguments = listOf(navArgument(name = relaxId) {type = NavType.LongType})
-        ) {backStackEntry ->
-            DetailRelaxScreen(
-                navController = navController,
-                id = backStackEntry.arguments?.getLong(relaxId))
+        ) { DetailRelaxScreen(
+                navController = navController)
         }
     }
 }
