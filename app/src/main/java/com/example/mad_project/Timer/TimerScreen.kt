@@ -61,6 +61,7 @@ fun TimerScreen(navController: NavController) {
             ) {
                 Text(text = "Timer")
             }
+
             Column(
                 modifier = Modifier.weight(weight = 9f),
                 horizontalAlignment = Alignment.CenterHorizontally,
