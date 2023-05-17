@@ -35,5 +35,12 @@ fun HomeScreen(navController: NavController) {
                 .clickable { navController.navigate(LEARNING_GRAPH_ROUTE) },
             text = "LEARNING"
         )
+
+        Text(
+            modifier = Modifier
+                .padding(top = 150.dp)
+                .clickable { navController.navigate(Screen.Timer.route) },
+            text = "TIMER"
+        )
     }
 }
