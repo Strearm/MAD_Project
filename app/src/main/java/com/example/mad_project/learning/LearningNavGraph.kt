@@ -1,10 +1,8 @@
-package com.example.mad_project.navigation.nav_graph
+package com.example.mad_project.learning
 
 import androidx.navigation.*
 import androidx.navigation.compose.composable
-import com.example.mad_project.learning.LearningViewModel
 import com.example.mad_project.navigation.*
-import com.example.mad_project.screens.*
 
 fun NavGraphBuilder.learningNavGraph(
     navController: NavHostController,

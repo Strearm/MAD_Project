@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.example.mad_project.learning.LearningViewModel
+import com.example.mad_project.learning.*
 import com.example.mad_project.navigation.HOME_GRAPH_ROUTE
 import com.example.mad_project.navigation.ROOT_GRAPH_ROUTE
 

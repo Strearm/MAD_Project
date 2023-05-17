@@ -1,4 +1,4 @@
-package com.example.mad_project.screens
+package com.example.mad_project.learning
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -12,7 +12,6 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.mad_project.learning.*
 import com.example.mad_project.navigation.*
 import com.example.mad_project.ui.theme.Purple500
 import com.example.mad_project.widgets.SimpleTopAppBar
@@ -35,7 +34,7 @@ fun LearningScreen(navController: NavController, viewModel: LearningViewModel)
 @Composable
 fun InformationLearning(){
     Box(modifier = Modifier
-        .padding(start = 15.dp, top = 25.dp, end = 15.dp)
+        .padding(start = 15.dp, top = 25.dp, end = 15.dp, bottom = 15.dp)
         .fillMaxWidth()
         .border(BorderStroke(2.dp, Color.Gray), shape = RoundedCornerShape(10.dp))) {
         Text(buildAnnotatedString {
