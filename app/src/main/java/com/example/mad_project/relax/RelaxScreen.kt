@@ -15,17 +15,23 @@ import com.example.mad_project.navigation.HOME_GRAPH_ROUTE
 import com.example.mad_project.navigation.LEARNING_GRAPH_ROUTE
 import com.example.mad_project.navigation.RELAX_GRAPH_ROUTE
 import com.example.mad_project.navigation.Screen
+import com.example.mad_project.widgets.SimpleTopAppBar
 
 @Composable
 fun RelaxScreen(navController: NavController)
 {
     Column(modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally) {
+        horizontalAlignment = Alignment.CenterHorizontally)
+    {
+        SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }
+        ) {
+            Text(text = "Relax")
+        }
         Text(
             modifier = Modifier
                 .padding(top = 150.dp),
-            text = "WELCOME TO RELAX"
+            text = "Take a break with relaxing techniques"
         )
 
         Text(
@@ -38,9 +44,11 @@ fun RelaxScreen(navController: NavController)
         Text(
             modifier = Modifier
                 .padding(top = 150.dp)
-                .clickable { navController.navigate(HOME_GRAPH_ROUTE) {
-                    popUpTo(HOME_GRAPH_ROUTE)
-                } },
+                .clickable {
+                    navController.navigate(HOME_GRAPH_ROUTE) {
+                        popUpTo(HOME_GRAPH_ROUTE)
+                    }
+                },
             text = "Go BACK"
         )
     }
