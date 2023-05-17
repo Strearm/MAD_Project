@@ -120,26 +120,25 @@ fun TimerScreen(navController: NavController) {
                         textLock = !textLock
                         coroutineScope.launch {
                             while (currentSec >= 0 && startButtonState) {
-                                seconds = currentSec.toString()
-                                minutes = currentMin.toString()
-                                hours = currentH.toString()
+                                seconds = String.format("%02d", currentSec)
+                                minutes = String.format("%02d", currentMin)
+                                hours = String.format("%02d", currentH)
                                 currentSec -= 1
+                                delay(timeMillis = 1000L)
                                 if(currentMin > 0 && currentSec < 0){
                                     currentMin -= 1
                                     currentSec = 59
-                                }
-                                if (currentH > 0 && currentMin == 0 && currentSec < 0){
+                                }else if (currentH > 0 && currentMin == 0 && currentSec < 0){
                                     currentH -= 1
                                     currentMin = 59
-                                }
-                                if(currentH <= 0 && currentMin <= 0 && currentSec <= 0){
+                                    currentSec = 59
+                                }else if(currentH <= 0 && currentMin <= 0 && currentSec <= 0){
                                     hours = "00"
                                     minutes = "00"
                                     seconds = "00"
                                     startButtonState = !startButtonState
                                     textLock = !textLock
                                 }
-                                delay(timeMillis = 1000L)
                             }
                         }
                     }
