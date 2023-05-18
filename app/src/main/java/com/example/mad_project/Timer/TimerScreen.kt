@@ -30,16 +30,7 @@ fun TimerScreen(navController: NavController) {
     var currentH = hours.toInt()
     //endregion time variables
 
-    //region errors
-    var secondsError by rememberSaveable{ mutableStateOf(false) }
-    var minutesError by rememberSaveable{ mutableStateOf(false) }
-    var hoursError by rememberSaveable{ mutableStateOf(false) }
-    //endregion errors
-
     var startButtonState by rememberSaveable{
-        mutableStateOf(false)
-    }
-    var textLock by rememberSaveable{
         mutableStateOf(false)
     }
     var buttonEnable by rememberSaveable{
@@ -52,6 +43,7 @@ fun TimerScreen(navController: NavController) {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
+
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.Center,
@@ -74,41 +66,39 @@ fun TimerScreen(navController: NavController) {
                     OutlinedTextField(
                         modifier = Modifier.weight(3f),
                         value = hours,
-                        onValueChange = { hours = timerViewModel.checkUnder24(it)
-                                        hoursError = timerViewModel.checkInput(hours)
+                        onValueChange = { timerViewModel.updateHours(it)
+                                            hours = timerViewModel.hours
                                         },
                         singleLine = true,
-                        readOnly = textLock,
+                        readOnly = startButtonState,
                         label = { Text(text = "Hours") },
                         textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.End),
-                        isError = hoursError
                     )
                     OutlinedTextField(
                         modifier = Modifier.weight(3f),
                         value = minutes,
-                        onValueChange = { minutes = timerViewModel.checkUnder60(it)
-                                        minutesError = timerViewModel.checkInput(minutes)
+                        onValueChange = { timerViewModel.updateMin(it)
+                                            minutes = timerViewModel.minutes
                                         },
                         singleLine = true,
-                        readOnly = textLock,
+                        readOnly = startButtonState,
                         label = { Text(text = "Minutes") },
                         textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.End),
-                        isError = minutesError
                     )
                     OutlinedTextField(
                         modifier = Modifier.weight(3f),
                         value = seconds,
-                        onValueChange = { seconds = timerViewModel.checkUnder60(it)
-                                        secondsError = timerViewModel.checkInput(seconds)},
+                        onValueChange = { timerViewModel.updateSec(it)
+                                            seconds = timerViewModel.seconds
+                                        },
                         singleLine = true,
-                        readOnly = textLock,
+                        readOnly = startButtonState,
                         label = { Text(text = "Seconds") },
                         textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.End),
-                        isError = secondsError
                     )
                 }
                 //inputFields()
-                Clock(hour = hours, minute = minutes, second = seconds)
+                Clock(hour = timerViewModel.hours, minute = timerViewModel.minutes, second = timerViewModel.seconds)
             }
             Row(modifier = Modifier.weight(1f)) {
                 buttonEnable = currentH > 0 || currentMin > 0 || currentSec > 0
@@ -118,7 +108,6 @@ fun TimerScreen(navController: NavController) {
                     enabled = buttonEnable,
                     onClick = {
                         startButtonState = !startButtonState
-                        textLock = !textLock
                         coroutineScope.launch {
                             while (currentSec >= 0 && startButtonState) {
                                 seconds = String.format("%02d", currentSec)
@@ -138,7 +127,6 @@ fun TimerScreen(navController: NavController) {
                                     minutes = "00"
                                     seconds = "00"
                                     startButtonState = !startButtonState
-                                    textLock = !textLock
                                 }
                             }
                         }
@@ -152,7 +140,6 @@ fun TimerScreen(navController: NavController) {
                     .padding(15.dp),
                     onClick = {
                         startButtonState = false
-                        textLock = false
                         hours = "00"
                         minutes = "00"
                         seconds = "00"
