@@ -13,6 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
 import coil.compose.AsyncImage
 import com.example.mad_project.ui.theme.Purple200
+import com.example.mad_project.ui.theme.SubtitleGray
 
 @Composable
 fun LearningRow(learning: Learning, onItemClick:(String) -> Unit) {
@@ -36,7 +37,6 @@ fun LearningRow(learning: Learning, onItemClick:(String) -> Unit) {
         }
     }
 }
-
 @Composable
 fun LearningImages(learning: Learning){
     AsyncImage(
@@ -45,15 +45,15 @@ fun LearningImages(learning: Learning){
         contentDescription = "Learning Method",
         modifier = Modifier
             .fillMaxWidth()
+            .border(BorderStroke(5.dp, Purple200), shape = RoundedCornerShape(20.dp))
     )
 }
-
 @Composable
 fun LearningTitles(learning: Learning) {
     Column(Modifier.background(Purple200, shape = RoundedCornerShape(20.dp))) {
         Text(
             modifier = Modifier
-                .padding(15.dp)
+                .padding(10.dp)
                 .fillMaxWidth(),
             text = learning.title.uppercase(),
             fontWeight = FontWeight.Bold,
@@ -65,7 +65,7 @@ fun LearningTitles(learning: Learning) {
                 .padding(start = 15.dp, end = 15.dp, bottom = 15.dp)
                 .fillMaxWidth(),
             text = learning.subtitle,
-            color = Color.Gray
+            color = SubtitleGray
         )
     }
 }
