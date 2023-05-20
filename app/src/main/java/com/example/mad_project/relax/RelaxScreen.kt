@@ -6,10 +6,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -88,12 +92,21 @@ fun RelaxIntro(){
 
 @Composable
 fun RelaxButtons(relaxTechnique: RelaxTechnique, onClick: () -> Unit) {
+    val isClicked = remember { mutableStateOf(false) }
+    val projectGreen = Color(0xFF71C55D)
+
     Button(
         modifier = Modifier
-            .padding(top = 10.dp)
+            .padding(top = 40.dp)
             .fillMaxWidth()
-            .padding(horizontal = 20.dp),
-        onClick = onClick
+            .padding(horizontal = 70.dp)
+            .border(2.dp, color = Purple500, RoundedCornerShape(50)),  // Rounded border
+        colors = ButtonDefaults.buttonColors(backgroundColor = if (isClicked.value) projectGreen else Color.White),
+        onClick = {
+            onClick()
+            isClicked.value = !isClicked.value
+        },
+        shape = RoundedCornerShape(50)  // Rounded button shape
     ) {
         Text(text = relaxTechnique.title)
     }
