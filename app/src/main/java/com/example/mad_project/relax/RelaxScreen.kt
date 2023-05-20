@@ -4,7 +4,10 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,6 +20,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.mad_project.learning.LearningRow
+import com.example.mad_project.learning.LearningViewModel
 import com.example.mad_project.navigation.HOME_GRAPH_ROUTE
 import com.example.mad_project.navigation.LEARNING_GRAPH_ROUTE
 import com.example.mad_project.navigation.RELAX_GRAPH_ROUTE
@@ -25,25 +30,24 @@ import com.example.mad_project.ui.theme.Purple500
 import com.example.mad_project.widgets.SimpleTopAppBar
 
 @Composable
-fun RelaxScreen(navController: NavController)
-{
-    Column(modifier = Modifier.fillMaxWidth(),
+fun RelaxScreen(navController: NavController) {
+    val relaxTechniques = getRelaxTechnique()
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally)
-    {
-        SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }
-        ) {
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }) {
             Text(text = "Relaxing Techniques")
         }
         RelaxIntro()
+        relaxTechniques.forEach { relaxTechnique ->
+            RelaxButtons(relaxTechnique) {
+                navController.navigate(route = Screen.Detail_Relax.passId(id = relaxTechnique.id))
+            }
+        }
 
-
-        Text(
-            modifier = Modifier
-                .padding(top = 150.dp)
-                .clickable { navController.navigate(route = Screen.Detail_Relax.passId(id = "1")) },
-            text = "RELAX Detail"
-        )
 
         Text(
             modifier = Modifier
@@ -57,6 +61,7 @@ fun RelaxScreen(navController: NavController)
         )
     }
 }
+
 
 @Composable
 fun RelaxIntro(){
@@ -78,5 +83,18 @@ fun RelaxIntro(){
         },
             modifier = Modifier.padding(10.dp)
         )
+    }
+}
+
+@Composable
+fun RelaxButtons(relaxTechnique: RelaxTechnique, onClick: () -> Unit) {
+    Button(
+        modifier = Modifier
+            .padding(top = 10.dp)
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp),
+        onClick = onClick
+    ) {
+        Text(text = relaxTechnique.title)
     }
 }
