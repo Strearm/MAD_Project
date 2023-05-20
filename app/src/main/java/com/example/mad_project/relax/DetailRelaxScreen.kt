@@ -1,4 +1,4 @@
-package com.example.mad_project.screens
+package com.example.mad_project.relax
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
