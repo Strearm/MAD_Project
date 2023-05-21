@@ -5,6 +5,7 @@ data class RelaxTechnique(
     val title: String,
     val inventor: String,
     val description: String,
+    val videoUrl: String,
 )
 
 fun getRelaxTechnique(): List<RelaxTechnique> {
@@ -13,20 +14,23 @@ fun getRelaxTechnique(): List<RelaxTechnique> {
             id = "1",
             title = "Meditation",
             inventor = "Guru Diese",
-            description = "Meditationstechnikbeschreibung"
+            description = "Meditationstechnikbeschreibung",
+            videoUrl = "t6jrkbgb9os&list=PL-yvVpWvnO7ZMJiPnrRFu18JPnYoktFxy"
             ),
         RelaxTechnique(
             id = "2",
             title = "Progressive Muscle Relaxation",
             inventor = "Jacobson",
-            description = "Muskel Entspannt Geist Entspannt ye"
+            description = "Muskel Entspannt Geist Entspannt ye",
+            videoUrl = "D7QoBABZu8k"
         ),
 
         RelaxTechnique(
             id = "3",
             title = "Autogenetic Training",
             inventor = "Mega Guru",
-            description = "Orge Entspannung"
+            description = "Orge Entspannung",
+            videoUrl = "PqnGEh0KIig&list=PL-yvVpWvnO7Z8H5zkeI_RDu75RjaU_Tq2"
         )
 
     )

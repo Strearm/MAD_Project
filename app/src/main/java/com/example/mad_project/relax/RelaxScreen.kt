@@ -111,3 +111,4 @@ fun RelaxButtons(relaxTechnique: RelaxTechnique, onClick: () -> Unit) {
         Text(text = relaxTechnique.title)
     }
 }
+

@@ -1,8 +1,6 @@
 package com.example.mad_project.relax
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,15 +11,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.mad_project.widgets.SimpleTopAppBar
+import com.example.mad_project.widgets.WebView
 
 @Composable
-fun DetailRelaxScreen(navController: NavController, id: Long?, viewModel: RelaxViewModel) {
-
+fun DetailRelaxScreen(navController: NavController, id: Long?, viewModel: RelaxViewModel, videoUrl: String) {
     val relaxTechnique: RelaxTechnique = viewModel.filterRelaxTechnique(id.toString())
 
     Column {
         SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }) {
             Text(text = relaxTechnique.title)
+        }
+
+        Box(modifier = Modifier.fillMaxWidth().height(200.dp)) {
+            WebView(videoUrl = "https://www.youtube.com/embed/$videoUrl")
         }
 
         Card(
