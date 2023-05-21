@@ -26,7 +26,9 @@ fun NavGraphBuilder.relaxNavGraph(
         ) {backStackEntry ->
             DetailRelaxScreen(
                 navController = navController,
-                id = backStackEntry.arguments?.getLong(relaxId))
+                id = backStackEntry.arguments?.getLong(relaxId),
+                viewModel = RelaxViewModel())
         }
     }
 }
+

@@ -78,7 +78,7 @@ fun RelaxIntro(){
             withStyle(style = ParagraphStyle(textAlign = TextAlign.Center)) {
                 append("Click on the relaxing technique to get more ")
                 withStyle(style = SpanStyle(color = Purple500)) {
-                    append("information")
+                    append("information ")
                 }
                 append(
                     "about the relaxing technique you can use. Relaxing techniques can have a high benefit to our mental health during stressful learning times."

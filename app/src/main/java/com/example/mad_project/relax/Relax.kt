@@ -9,18 +9,21 @@ data class RelaxTechnique(
 
 fun getRelaxTechnique(): List<RelaxTechnique> {
     return listOf(
-        RelaxTechnique(id = "1",
+        RelaxTechnique(
+            id = "1",
             title = "Meditation",
             inventor = "Guru Diese",
             description = "Meditationstechnikbeschreibung"
             ),
-        RelaxTechnique(id = "2",
+        RelaxTechnique(
+            id = "2",
             title = "Progressive Muscle Relaxation",
             inventor = "Jacobson",
             description = "Muskel Entspannt Geist Entspannt ye"
         ),
 
-        RelaxTechnique(id = "3",
+        RelaxTechnique(
+            id = "3",
             title = "Autogenetic Training",
             inventor = "Mega Guru",
             description = "Orge Entspannung"

@@ -9,7 +9,7 @@ class RelaxViewModel : ViewModel() {
     val relaxList: List<RelaxTechnique>
         get() = _relaxList
 
-    fun filterLearning(relaxId: String): RelaxTechnique {
+    fun filterRelaxTechnique(relaxId: String): RelaxTechnique {
         return relaxList.filter { it.id == relaxId}[0]
     }
 }
