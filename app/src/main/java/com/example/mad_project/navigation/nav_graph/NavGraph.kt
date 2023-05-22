@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import com.example.mad_project.learning.*
 import com.example.mad_project.navigation.HOME_GRAPH_ROUTE
 import com.example.mad_project.navigation.ROOT_GRAPH_ROUTE
+import com.example.mad_project.relax.relaxNavGraph
 
 @Composable
 fun SetupNavGraph(
