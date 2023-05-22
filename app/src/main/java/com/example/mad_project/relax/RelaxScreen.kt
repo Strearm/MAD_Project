@@ -52,17 +52,6 @@ fun RelaxScreen(navController: NavController) {
             }
         }
 
-
-        Text(
-            modifier = Modifier
-                .padding(top = 150.dp)
-                .clickable {
-                    navController.navigate(HOME_GRAPH_ROUTE) {
-                        popUpTo(HOME_GRAPH_ROUTE)
-                    }
-                },
-            text = "Go BACK"
-        )
     }
 }
 
