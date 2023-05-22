@@ -97,6 +97,7 @@ fun TimerScreen(navController: NavController) {
                     )
                 }
                 //inputFields()
+
                 Clock(hour = timerViewModel.hours, minute = timerViewModel.minutes, second = timerViewModel.seconds)
             }
             Row(modifier = Modifier.weight(1f)) {
@@ -112,6 +113,9 @@ fun TimerScreen(navController: NavController) {
                                 seconds = String.format("%02d", currentSec)
                                 minutes = String.format("%02d", currentMin)
                                 hours = String.format("%02d", currentH)
+                                timerViewModel.updateSec(seconds)
+                                timerViewModel.updateMin(minutes)
+                                timerViewModel.updateHours(hours)
                                 currentSec -= 1
                                 delay(timeMillis = 1000L)
                                 if(currentMin > 0 && currentSec < 0){

@@ -3,6 +3,9 @@ package com.example.mad_project.Timer
 import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flow
+import java.util.concurrent.Flow
 
 class TimerViewModel :ViewModel(){
     //region UIVariables
@@ -26,7 +29,20 @@ class TimerViewModel :ViewModel(){
     val seconds:String
         get() = _seconds
     //endregion UIVariables
+
     private var lastProperInput: String = "00"
+
+    val hMinSecFlow = flow<Int> {
+        val startValue = _seconds.toInt()
+        var current = startValue
+        while (current > 0) {
+            delay(1000L)
+            current -= 1
+            emit(current)
+        }
+    }
+
+    //region FUNCTIONS
     fun toggleStart(){ _buttonState = !_buttonState }
     fun toFalse(){ _buttonState = false }
     fun updateHours(hour: String){
@@ -62,6 +78,13 @@ class TimerViewModel :ViewModel(){
             value
         }
     }
+    suspend fun countDownSimple(value: String){
+        var currentValue = value.toInt()
+        while(currentValue >0){
+            currentValue -= 1
+            delay(timeMillis = 1000L)
+        }
+    }
     suspend fun countDown(){
         var currentSec = _seconds.toInt()
         var currentMin = _minutes.toInt()
@@ -88,4 +111,5 @@ class TimerViewModel :ViewModel(){
             }
         }
     }
+    //endregion FUNCTIONS
 }
