@@ -18,7 +18,7 @@ fun HyperlinkText(
     linkTextColor: androidx.compose.ui.graphics.Color = LinkBlue,
     linkTextFontWeight: FontWeight = FontWeight.Medium,
     linkTextDecoration: TextDecoration = TextDecoration.Underline,
-    hyperlinks: List<String> = listOf("https://stevdza-san.com"),
+    hyperlinks: List<String> = listOf("https://google.com"),
     fontSize: TextUnit = TextUnit.Unspecified
 ) {
     val annotatedString = buildAnnotatedString {
