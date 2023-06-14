@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.mad_project.navigation.Screen
 import com.example.mad_project.widgets.SimpleTopAppBar
 import com.example.mad_project.widgets.WebView
 
@@ -72,6 +73,9 @@ fun DetailRelaxScreen(navController: NavHostController, id: Long?, viewModel: Re
                     usedVideoUrls.clear()
                     usedVideoUrls.add(currentVideoUrl.value)
                 }
+                navController.popBackStack()
+                navController.navigate(route = Screen.Detail_Relax.passId(id = relaxTechnique.id))
+
             },
             modifier = Modifier.padding(16.dp)
         ) {
