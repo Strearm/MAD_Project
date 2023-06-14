@@ -13,13 +13,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.mad_project.widgets.SimpleTopAppBar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.concurrent.timer
 
 @Composable
-fun TimerScreen(navController: NavController) {
+fun TimerScreen(navController: NavHostController) {
     //region variable declarations
     //region time variables
     var hours by rememberSaveable { mutableStateOf("00") }
@@ -49,7 +50,7 @@ fun TimerScreen(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }
+            SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }, navController = navController
             ) {
                 Text(text = "Timer")
             }

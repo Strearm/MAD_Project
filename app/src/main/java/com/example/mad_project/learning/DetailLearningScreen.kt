@@ -13,18 +13,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.mad_project.ui.theme.Purple200
 import com.example.mad_project.widgets.HyperlinkText
 import com.example.mad_project.widgets.SimpleTopAppBar
 
 @Composable
-fun DetailLearningScreen(navController: NavController, id:Long?, viewModel: LearningViewModel) {
+fun DetailLearningScreen(navController: NavHostController, id:Long?, viewModel: LearningViewModel) {
     val learning: Learning = viewModel.filterLearning(id.toString())
 
     LazyColumn {
         item {
-            SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }
+            SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }, navController = navController
             ) {
                 Text(text = learning.title)
             }

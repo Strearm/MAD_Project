@@ -1,5 +1,6 @@
 package com.example.mad_project.relax
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -10,6 +11,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -24,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.mad_project.learning.LearningRow
 import com.example.mad_project.learning.LearningViewModel
 import com.example.mad_project.navigation.HOME_GRAPH_ROUTE
@@ -31,10 +34,12 @@ import com.example.mad_project.navigation.LEARNING_GRAPH_ROUTE
 import com.example.mad_project.navigation.RELAX_GRAPH_ROUTE
 import com.example.mad_project.navigation.Screen
 import com.example.mad_project.ui.theme.Purple500
+import com.example.mad_project.widgets.BottomBar
 import com.example.mad_project.widgets.SimpleTopAppBar
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun RelaxScreen(navController: NavController) {
+fun RelaxScreen(navController: NavHostController) {
     val relaxTechniques = getRelaxTechnique()
 
     Column(
@@ -42,7 +47,7 @@ fun RelaxScreen(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }) {
+        SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }, navController = navController) {
             Text(text = "Relaxing Techniques")
         }
         RelaxIntro()
@@ -50,6 +55,10 @@ fun RelaxScreen(navController: NavController) {
             RelaxButtons(relaxTechnique) {
                 navController.navigate(route = Screen.Detail_Relax.passId(id = relaxTechnique.id))
             }
+        }
+
+        Scaffold(bottomBar = { BottomBar(navController = navController) }) {
+
         }
 
     }
