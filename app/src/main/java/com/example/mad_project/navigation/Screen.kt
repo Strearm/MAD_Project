@@ -1,5 +1,12 @@
 package com.example.mad_project.navigation
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.ui.graphics.vector.ImageVector
+
 const val learningId = "learningId"
 const val relaxId = "relaxId"
 
@@ -9,19 +16,32 @@ const val LEARNING_GRAPH_ROUTE = "learning"
 const val RELAX_GRAPH_ROUTE = "relax"
 const val TIMER_GRAPH_ROUTE = "timer"
 
-sealed class Screen(val route: String) {
-    object Home : Screen(route = "home_screen")
-    object Learning: Screen(route = "learning_screen")
-    object Detail_Learning : Screen(route = "detail_learning_screen/{$learningId}") {
+sealed class Screen(val route: String, val title: String, val icon: ImageVector) {
+    object Home : Screen(
+        route = "home_screen",
+        title = "Home",
+        icon = Icons.Default.Home)
+    object Learning: Screen(
+        route = "learning_screen",
+        title = "Learning",
+        icon = Icons.Default.Edit
+    )
+    object Detail_Learning : Screen(route = "detail_learning_screen/{$learningId}",title = "Detail Learning", icon = Icons.Default.Edit) {
         fun passId(id: String): String {
             return this.route.replace(oldValue = "{$learningId}", newValue = id)
         }
     }
-    object Relax: Screen(route = "relax_screen")
-    object Detail_Relax : Screen(route = "detail_relax_screen/{$relaxId}") {
+    object Relax: Screen(
+        route = "relax_screen",
+        title = "Relax",
+        icon = Icons.Default.Face)
+    object Detail_Relax : Screen(route = "detail_relax_screen/{$relaxId}",title = "Detail Relax", icon = Icons.Default.Face) {
         fun passId(id: String): String {
             return this.route.replace(oldValue = "{$relaxId}", newValue = id)
         }
     }
-    object Timer: Screen(route = "timer_screen")
+    object Timer: Screen(
+        route = "timer_screen",
+        title = "Timer",
+        icon = Icons.Default.Refresh)
 }

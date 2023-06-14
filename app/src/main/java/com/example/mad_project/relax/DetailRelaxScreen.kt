@@ -10,15 +10,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.mad_project.widgets.SimpleTopAppBar
 import com.example.mad_project.widgets.WebView
 
 @Composable
-fun DetailRelaxScreen(navController: NavController, id: Long?, viewModel: RelaxViewModel, videoUrl: String) {
+fun DetailRelaxScreen(navController: NavHostController, id: Long?, viewModel: RelaxViewModel, videoUrl: String) {
     val relaxTechnique: RelaxTechnique = viewModel.filterRelaxTechnique(id.toString())
 
     Column {
-        SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }) {
+        SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }, navController = navController) {
             Text(text = relaxTechnique.title)
         }
 

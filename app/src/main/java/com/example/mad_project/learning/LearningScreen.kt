@@ -1,9 +1,11 @@
 package com.example.mad_project.learning
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.*
@@ -12,23 +14,30 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.mad_project.navigation.*
 import com.example.mad_project.ui.theme.Purple500
+import com.example.mad_project.widgets.BottomBar
 import com.example.mad_project.widgets.SimpleTopAppBar
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun LearningScreen(navController: NavController, viewModel: LearningViewModel)
+fun LearningScreen(navController: NavHostController, viewModel: LearningViewModel)
 {
     Column(modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
 
-        SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }
+
+        SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() },navController = navController
         ) {
             Text(text = "Learning Techniques")
         }
         InformationLearning()
         LearningList(navController, viewModel)
+        Scaffold(bottomBar = { BottomBar(navController = navController) }) {
+
+        }
     }
 }
 @Composable
@@ -56,7 +65,7 @@ fun InformationLearning(){
 }
 
 @Composable
-fun LearningList(navController: NavController, viewModel: LearningViewModel){
+fun LearningList(navController: NavHostController, viewModel: LearningViewModel){
     LazyColumn{
         items(viewModel.learningList) {learning ->
             LearningRow(learning = learning, onItemClick = {learningID ->
