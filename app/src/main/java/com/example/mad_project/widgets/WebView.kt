@@ -35,22 +35,16 @@ fun WebView(videoUrl: String) {
 }
 
 @Composable
-fun WebViewPlaylist(videoUrls: List<String>) {
-    val shuffledVideoUrls = remember { videoUrls.shuffled() }
-    val currentVideoUrlIndex = remember { mutableStateOf(0) }
-    val currentVideoUrl = remember { mutableStateOf(shuffledVideoUrls[currentVideoUrlIndex.value]) }
+fun WebViewWrapper(videoUrl: String) {
+    val key = remember { mutableStateOf(videoUrl) }
+    LaunchedEffect(videoUrl) {
+        key.value = videoUrl
+    }
 
     Box(modifier = Modifier.fillMaxWidth().height(200.dp)) {
-        WebView(videoUrl = currentVideoUrl.value)
-    }
-
-    LaunchedEffect(Unit) {
-        val randomIndex = (0 until shuffledVideoUrls.size).random()
-        currentVideoUrlIndex.value = randomIndex
-        currentVideoUrl.value = shuffledVideoUrls[currentVideoUrlIndex.value]
+        WebView(videoUrl = videoUrl)
     }
 }
-
 
 fun filterVideoUrls(relaxTechnique: RelaxTechnique, relaxTechniques: List<RelaxTechnique>): List<String> {
     return relaxTechniques.find { it.id == relaxTechnique.id }?.videoUrl.orEmpty()
