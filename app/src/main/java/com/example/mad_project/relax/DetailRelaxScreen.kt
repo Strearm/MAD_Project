@@ -29,7 +29,7 @@ import com.example.mad_project.widgets.SimpleTopAppBar
 import com.example.mad_project.widgets.WebView
 
 @Composable
-fun DetailRelaxScreen(navController: NavController, id: Long?, viewModel: RelaxViewModel, videoUrl: List<String>?) {
+fun DetailRelaxScreen(navController: NavHostController, id: Long?, viewModel: RelaxViewModel, videoUrl: List<String>?) {
     val relaxTechnique: RelaxTechnique = viewModel.filterRelaxTechnique(id.toString())
 
     val filteredVideoUrls = filterVideoUrls(relaxTechnique, getRelaxTechnique())
