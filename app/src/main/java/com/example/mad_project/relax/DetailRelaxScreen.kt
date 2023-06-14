@@ -3,6 +3,7 @@ package com.example.mad_project.relax
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
@@ -47,81 +48,85 @@ fun DetailRelaxScreen(navController: NavHostController, id: Long?, viewModel: Re
     val descriptionExpanded = remember { mutableStateOf(false) }
     val bestAvoidedExpanded = remember { mutableStateOf(false) }
 
-    Column {
-        SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }, navController = navController) {
-            Text(text = relaxTechnique.title)
-        }
+    LazyColumn {
+        item {
+            SimpleTopAppBar(
+                arrowBackClicked = { navController.popBackStack() },
+                navController = navController
+            ) {
+                Text(text = relaxTechnique.title)
+            }
 
-        WebViewWrapper(videoUrl = currentVideoUrl.value)
+            WebViewWrapper(videoUrl = currentVideoUrl.value)
 
 
-        Button(
-            onClick = {
-                if (currentVideoUrlIndex.value < shuffledVideoUrls.size - 1) {
-                    val unwatchedVideoUrls =
-                        shuffledVideoUrls.filterIndexed { index, _ -> index > currentVideoUrlIndex.value }
-                    val randomIndex = (0 until unwatchedVideoUrls.size).random()
-                    val newIndex = shuffledVideoUrls.indexOf(unwatchedVideoUrls[randomIndex])
-                    currentVideoUrlIndex.value = newIndex
-                    currentVideoUrl.value = shuffledVideoUrls[newIndex]
-                    usedVideoUrls.add(currentVideoUrl.value)
-                } else {
-                    // Wenn alle Videos gesehen wurden, mische die Liste erneut und starte von vorne
-                    val newShuffledList = shuffledVideoUrls.shuffled()
-                    currentVideoUrlIndex.value = 0
-                    currentVideoUrl.value = newShuffledList[0]
-                    usedVideoUrls.clear()
-                    usedVideoUrls.add(currentVideoUrl.value)
+            Button(
+                onClick = {
+                    if (currentVideoUrlIndex.value < shuffledVideoUrls.size - 1) {
+                        val unwatchedVideoUrls =
+                            shuffledVideoUrls.filterIndexed { index, _ -> index > currentVideoUrlIndex.value }
+                        val randomIndex = (0 until unwatchedVideoUrls.size).random()
+                        val newIndex = shuffledVideoUrls.indexOf(unwatchedVideoUrls[randomIndex])
+                        currentVideoUrlIndex.value = newIndex
+                        currentVideoUrl.value = shuffledVideoUrls[newIndex]
+                        usedVideoUrls.add(currentVideoUrl.value)
+                    } else {
+                        // Wenn alle Videos gesehen wurden, mische die Liste erneut und starte von vorne
+                        val newShuffledList = shuffledVideoUrls.shuffled()
+                        currentVideoUrlIndex.value = 0
+                        currentVideoUrl.value = newShuffledList[0]
+                        usedVideoUrls.clear()
+                        usedVideoUrls.add(currentVideoUrl.value)
+                    }
+                    navController.popBackStack()
+                    navController.navigate(route = Screen.Detail_Relax.passId(id = relaxTechnique.id))
+
+                },
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(text = "Other Video")
+            }
+
+            Card(
+                shape = RoundedCornerShape(8.dp),
+                elevation = 8.dp,
+                modifier = Modifier.padding(8.dp)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    ExpandableHeader(
+                        headerText = "Inventor",
+                        isExpanded = inventorExpanded.value,
+                        onClick = { inventorExpanded.value = !inventorExpanded.value }
+                    )
+                    ExpandableContent(
+                        content = relaxTechnique.inventor,
+                        isExpanded = inventorExpanded.value
+                    )
+
+                    ExpandableHeader(
+                        headerText = "Description",
+                        isExpanded = descriptionExpanded.value,
+                        onClick = { descriptionExpanded.value = !descriptionExpanded.value }
+                    )
+                    ExpandableContent(
+                        content = relaxTechnique.description,
+                        isExpanded = descriptionExpanded.value
+                    )
+
+                    ExpandableHeader(
+                        headerText = "Do not use this technique",
+                        isExpanded = bestAvoidedExpanded.value,
+                        onClick = { bestAvoidedExpanded.value = !bestAvoidedExpanded.value }
+                    )
+                    ExpandableContent(
+                        content = relaxTechnique.bestAvoided,
+                        isExpanded = bestAvoidedExpanded.value
+                    )
                 }
-                navController.popBackStack()
-                navController.navigate(route = Screen.Detail_Relax.passId(id = relaxTechnique.id))
-
-            },
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(text = "Other Video")
-        }
-
-        Card(
-            shape = RoundedCornerShape(8.dp),
-            elevation = 8.dp,
-            modifier = Modifier.padding(8.dp)
-        ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                ExpandableHeader(
-                    headerText = "Inventor",
-                    isExpanded = inventorExpanded.value,
-                    onClick = { inventorExpanded.value = !inventorExpanded.value }
-                )
-                ExpandableContent(
-                    content = relaxTechnique.inventor,
-                    isExpanded = inventorExpanded.value
-                )
-
-                ExpandableHeader(
-                    headerText = "Description",
-                    isExpanded = descriptionExpanded.value,
-                    onClick = { descriptionExpanded.value = !descriptionExpanded.value }
-                )
-                ExpandableContent(
-                    content = relaxTechnique.description,
-                    isExpanded = descriptionExpanded.value
-                )
-
-                ExpandableHeader(
-                    headerText = "Do not use this technique",
-                    isExpanded = bestAvoidedExpanded.value,
-                    onClick = { bestAvoidedExpanded.value = !bestAvoidedExpanded.value }
-                )
-                ExpandableContent(
-                    content = relaxTechnique.bestAvoided,
-                    isExpanded = bestAvoidedExpanded.value
-                )
             }
         }
     }
 }
-
 @Composable
 fun ExpandableHeader(
     headerText: String,
