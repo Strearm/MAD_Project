@@ -34,7 +34,7 @@ fun NavGraphBuilder.relaxNavGraph(
                     viewModel = RelaxViewModel()
                 )
             } else {
-                // Handle the case where no matching technique is found
+                println("Oops, this relaxing technique was not found, sorry!")
             }
         }
     }
