@@ -1,10 +1,16 @@
 package com.example.mad_project.relax
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -14,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.mad_project.widgets.*
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
@@ -32,6 +39,9 @@ fun DetailRelaxScreen(navController: NavController, id: Long?, viewModel: RelaxV
             shuffledVideoUrls[currentVideoUrlIndex.value]
         )
     }
+    val inventorExpanded = remember { mutableStateOf(false) }
+    val descriptionExpanded = remember { mutableStateOf(false) }
+    val bestAvoidedExpanded = remember { mutableStateOf(false) }
 
     Column {
         SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }) {
@@ -71,32 +81,68 @@ fun DetailRelaxScreen(navController: NavController, id: Long?, viewModel: RelaxV
             modifier = Modifier.padding(8.dp)
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = "Inventor:",
-                    style = TextStyle(color = Color(0xFF006400), fontSize = 20.sp)
+                ExpandableHeader(
+                    headerText = "Inventor",
+                    isExpanded = inventorExpanded.value,
+                    onClick = { inventorExpanded.value = !inventorExpanded.value }
                 )
-                Text(
-                    text = "${relaxTechnique.inventor}\n",
-                    style = TextStyle(fontSize = 16.sp)
+                ExpandableContent(
+                    content = relaxTechnique.inventor,
+                    isExpanded = inventorExpanded.value
                 )
-                Text(
-                    text = "Description:",
-                    style = TextStyle(color = Color(0xFF006400), fontSize = 20.sp)
+
+                ExpandableHeader(
+                    headerText = "Description",
+                    isExpanded = descriptionExpanded.value,
+                    onClick = { descriptionExpanded.value = !descriptionExpanded.value }
                 )
-                Text(
-                    text = "${relaxTechnique.description}\n",
-                    style = TextStyle(fontSize = 16.sp)
+                ExpandableContent(
+                    content = relaxTechnique.description,
+                    isExpanded = descriptionExpanded.value
                 )
-                Text(
-                    text = "Do not use this technique:",
-                    style = TextStyle(color = Color(0xFF006400), fontSize = 20.sp)
+
+                ExpandableHeader(
+                    headerText = "Do not use this technique",
+                    isExpanded = bestAvoidedExpanded.value,
+                    onClick = { bestAvoidedExpanded.value = !bestAvoidedExpanded.value }
                 )
-                Text(
-                    text = "${relaxTechnique.bestAvoided}\n",
-                    style = TextStyle(fontSize = 16.sp)
+                ExpandableContent(
+                    content = relaxTechnique.bestAvoided,
+                    isExpanded = bestAvoidedExpanded.value
                 )
             }
         }
     }
 }
 
+@Composable
+fun ExpandableHeader(
+    headerText: String,
+    isExpanded: Boolean,
+    onClick: () -> Unit
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.clickable { onClick() }
+    ) {
+        Icon(
+            imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+            contentDescription = null
+        )
+        Text(
+            text = headerText,
+            style = TextStyle(color = Color(0xFF006400), fontSize = 20.sp)
+        )
+    }
+}
+
+@Composable
+fun ExpandableContent(content: String, isExpanded: Boolean) {
+    AnimatedVisibility(visible = isExpanded) {
+        Text(
+            text = content,
+            style = TextStyle(fontSize = 16.sp),
+            modifier = Modifier.padding(start = 16.dp)
+        )
+    }
+}
