@@ -34,9 +34,11 @@ fun LearningScreen(navController: NavHostController, viewModel: LearningViewMode
             Text(text = "Learning Techniques")
         }
         InformationLearning()
-        LearningList(navController, viewModel)
-        Scaffold(bottomBar = { BottomBar(navController = navController) }) {
 
+        Scaffold(bottomBar = { BottomBar(navController = navController) }) {
+            Column(modifier = Modifier.padding(bottom = 55.dp)) {
+                LearningList(navController, viewModel)
+            }
         }
     }
 }
