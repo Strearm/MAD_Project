@@ -1,15 +1,13 @@
 package com.example.mad_project.Timer
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -20,12 +18,15 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.example.mad_project.learning.LearningList
+import com.example.mad_project.widgets.BottomBar
 import com.example.mad_project.widgets.SimpleTopAppBar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 var globSec: String = "00"
 var globMin: String = "00"
 var globH: String = "00"
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun TimerScreen(navController: NavHostController) {
     //region variable declarations
@@ -37,33 +38,38 @@ fun TimerScreen(navController: NavHostController) {
     val Min by timerViewModel.minutes.collectAsState()
     val Hour by timerViewModel.hours.collectAsState()
     //endregion variable declarations
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+
+    Scaffold(bottomBar = { BottomBar(navController = navController) }) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
         ) {
-            //TopBAR
-            SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() },
-                navController = navController
-            ) {
-                Text(text = "Timer")
-            }
             Column(
-                modifier = Modifier.weight(weight = 9f),
-                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.Center,
-            )
-            {
-                //Main Content
-                InputFields(timerViewModel = timerViewModel, startButtonState = startButtonState)
-                //RealTimeCountdown
-                Clock(hour = Hour, minute = Min, second = Sec)
-            }
-            Row(modifier = Modifier.weight(1f)) {
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                //TopBAR
+                SimpleTopAppBar(
+                    arrowBackClicked = { navController.popBackStack() },
+                    navController = navController
+                ) {
+                    Text(text = "Timer")
+                }
+                Column(
+                    modifier = Modifier.weight(weight = 9f),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                )
+                {
+                    //Main Content
+                    InputFields(
+                        timerViewModel = timerViewModel,
+                        startButtonState = startButtonState
+                    )
+                    //RealTimeCountdown
+                    Clock(hour = Hour, minute = Min, second = Sec)
+                }
                 //buttonRow
                 ButtonRow(
                     timerViewModel = timerViewModel,
@@ -146,10 +152,9 @@ fun ButtonRow(
     coroutineScope: CoroutineScope
 ) {
     Row() {
-
         Button(modifier = Modifier
             .weight(1f)
-            .padding(15.dp),
+            .padding(horizontal = 15.dp, vertical = 65.dp),
             enabled = timerViewModel.checkFinished(),
             onClick = {
                 timerViewModel.toggleStart()
@@ -163,7 +168,7 @@ fun ButtonRow(
         Spacer(modifier = Modifier.width(10.dp))
         Button(modifier = Modifier
             .weight(1f)
-            .padding(15.dp),
+            .padding(horizontal = 15.dp, vertical = 65.dp),
             onClick = {
                 timerViewModel.toFalse()
                 timerViewModel.resetCounter(hours = globH, minutes = globMin, seconds = globSec)
