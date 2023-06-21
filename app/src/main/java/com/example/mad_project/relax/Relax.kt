@@ -25,7 +25,8 @@ fun getRelaxTechnique(): List<RelaxTechnique> {
                     "\nWhen under the influence of drugs/alcohol" +
                     "\nDuring a psychotic phase" +
                     "\nDuring trauma intrusions or flashbacks" ,
-            videoUrl = listOf("z0GtmPnqAd8", "C5MaztWGaN0","nIb2LbqHtY4")
+            videoUrl = listOf("z0GtmPnqAd8", "C5MaztWGaN0","nIb2LbqHtY4", "G1TD2uVdotM", "zdDQ5Nj8",
+                "3eEITlaLjhc", "8xqvw9ocerg", "fVF56TnXjgQ", "IzV6J4WCwRM", "euCACO-KtHE")
             ),
         RelaxTechnique(
             id = "2",
@@ -33,17 +34,18 @@ fun getRelaxTechnique(): List<RelaxTechnique> {
             inventor = "Jacobson",
             description = "Muskel Entspannt Geist Entspannt ye",
             bestAvoided ="",
-            videoUrl = listOf("D7QoBABZu8k", "pyxvL1O2duk","wGlWXiu4vLA","_1h-zizAGsc",
-                "SNqYG95j_UQ", "86HUcX8ZtAk", "6wMkq5uUSN8", "fDZI-4udE_o" )
+            videoUrl = listOf("D7QoBABZu8k", "pyxvL1O2duk","QkswdqpHqww","_1h-zizAGsc",
+                "SNqYG95j_UQ", "86HUcX8ZtAk", "6wMkq5uUSN8", "fDZI-4udE_o", "IZub-H2G4d4", "B3anDh-jxw4&t" )
         ),
 
         RelaxTechnique(
             id = "3",
-            title = "Autogenetic Training",
+            title = "Autogenic Training",
             inventor = "Mega Guru",
             description = "Orge Entspannung",
             bestAvoided= "",
-            videoUrl = listOf("PqnGEh0KIig")
+            videoUrl = listOf("PqnGEh0KIig", "H62t26iYF9o", "yof5RsL_62s", "_39ZYOUxj_8", "2kvjiWEcOy8",
+                "ELdlFwJOeK8", "P-_6GlnlOtM", "MFxlK1ZvOmA", "ZAlkoCkb1Ws", "ZHoTgwG_v5U")
         )
 
     )

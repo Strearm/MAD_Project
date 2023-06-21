@@ -1,6 +1,8 @@
 package com.example.mad_project.relax
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,8 +12,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -59,9 +60,9 @@ fun DetailRelaxScreen(navController: NavHostController, id: Long?, viewModel: Re
 
             WebViewWrapper(videoUrl = currentVideoUrl.value)
 
-
-            Button(
-                onClick = {
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                Button(
+                    onClick = {
                     if (currentVideoUrlIndex.value < shuffledVideoUrls.size - 1) {
                         val unwatchedVideoUrls =
                             shuffledVideoUrls.filterIndexed { index, _ -> index > currentVideoUrlIndex.value }
@@ -82,11 +83,11 @@ fun DetailRelaxScreen(navController: NavHostController, id: Long?, viewModel: Re
                     navController.navigate(route = Screen.Detail_Relax.passId(id = relaxTechnique.id))
 
                 },
-                modifier = Modifier.padding(16.dp)
-            ) {
-                Text(text = "Other Video")
+                    modifier = Modifier.padding(vertical = 16.dp)
+                ) {
+                    Text(text = "Change Video")
+                }
             }
-
             Card(
                 shape = RoundedCornerShape(8.dp),
                 elevation = 8.dp,
@@ -133,20 +134,33 @@ fun ExpandableHeader(
     isExpanded: Boolean,
     onClick: () -> Unit
 ) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable { onClick() }
+    Box(
+        modifier = Modifier
+            .clickable { onClick() }
+            .border(
+                BorderStroke(2.dp, Color.Gray),
+                shape = RoundedCornerShape(10.dp)
+            )
+            .padding(8.dp)
     ) {
-        Icon(
-            imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-            contentDescription = null
-        )
-        Text(
-            text = headerText,
-            style = TextStyle(color = Color(0xFF006400), fontSize = 20.sp)
-        )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                contentDescription = null
+            )
+            Spacer(modifier = Modifier.width(8.dp)) // Fügt einen Abstand zwischen Icon und Text hinzu
+            Text(
+                text = headerText,
+                style = TextStyle(color = Color(0xFF006400), fontSize = 20.sp),
+                modifier = Modifier.weight(1f) // Nimmt den verfügbaren horizontalen Platz ein
+            )
+        }
     }
 }
+
+
 
 @Composable
 fun ExpandableContent(content: String, isExpanded: Boolean) {
