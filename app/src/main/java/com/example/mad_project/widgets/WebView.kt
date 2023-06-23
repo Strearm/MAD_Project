@@ -17,6 +17,17 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.example.mad_project.relax.RelaxTechnique
 import com.example.mad_project.relax.getRelaxTechnique
 import kotlinx.coroutines.delay
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.ui.PlayerView
 
 @Composable
 fun WebView(videoUrl: String) {
@@ -50,5 +61,7 @@ fun filterVideoUrls(relaxTechnique: RelaxTechnique, relaxTechniques: List<RelaxT
     return relaxTechniques.find { it.id == relaxTechnique.id }?.videoUrl.orEmpty()
         .map { "https://www.youtube.com/embed/$it" }
 }
+
+
 
 

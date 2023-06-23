@@ -19,7 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.example.mad_project.widgets.*
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
@@ -29,7 +28,14 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.mad_project.navigation.Screen
 import com.example.mad_project.widgets.SimpleTopAppBar
-import com.example.mad_project.widgets.WebView
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
 
 @Composable
 fun DetailRelaxScreen(navController: NavHostController, id: Long?, viewModel: RelaxViewModel, videoUrl: List<String>?) {
@@ -48,6 +54,13 @@ fun DetailRelaxScreen(navController: NavHostController, id: Long?, viewModel: Re
     val inventorExpanded = remember { mutableStateOf(false) }
     val descriptionExpanded = remember { mutableStateOf(false) }
     val bestAvoidedExpanded = remember { mutableStateOf(false) }
+    val isVideoPlaying = remember { mutableStateOf(false) }
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(if (isVideoPlaying.value) Color.Black else Color.White)
+    ) {
 
     LazyColumn {
         item {
@@ -55,8 +68,15 @@ fun DetailRelaxScreen(navController: NavHostController, id: Long?, viewModel: Re
                 arrowBackClicked = { navController.popBackStack() },
                 navController = navController
             ) {
-                Text(text = relaxTechnique.title)
+                Text(
+                    text = relaxTechnique.title,
+                    style = TextStyle(
+                        color = if (isVideoPlaying.value) Color.White else Color.Black,
+                        fontSize = 20.sp
+                    )
+                )
             }
+            Spacer(modifier = Modifier.height(16.dp)) // Abstand hinzufügen
 
             WebViewWrapper(videoUrl = currentVideoUrl.value)
 
@@ -128,6 +148,7 @@ fun DetailRelaxScreen(navController: NavHostController, id: Long?, viewModel: Re
         }
     }
 }
+}
 @Composable
 fun ExpandableHeader(
     headerText: String,
@@ -137,10 +158,6 @@ fun ExpandableHeader(
     Box(
         modifier = Modifier
             .clickable { onClick() }
-            .border(
-                BorderStroke(2.dp, Color.Gray),
-                shape = RoundedCornerShape(10.dp)
-            )
             .padding(8.dp)
     ) {
         Row(
@@ -161,14 +178,23 @@ fun ExpandableHeader(
 }
 
 
-
 @Composable
 fun ExpandableContent(content: String, isExpanded: Boolean) {
     AnimatedVisibility(visible = isExpanded) {
-        Text(
-            text = content,
-            style = TextStyle(fontSize = 16.sp),
-            modifier = Modifier.padding(start = 16.dp)
-        )
+        Box(
+            modifier = Modifier
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .border(
+                    BorderStroke(2.dp, Color.Yellow),
+                    shape = RoundedCornerShape(10.dp)
+                )
+                .width(680.dp) // Breite anpassen
+        ) {
+            Text(
+                text = content,
+                style = TextStyle(fontSize = 16.sp, lineHeight = 24.sp),
+                modifier = Modifier.padding(8.dp, 4.dp)
+            )
+        }
     }
 }
