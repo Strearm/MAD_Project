@@ -1,13 +1,8 @@
 package com.example.mad_project.relax
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -25,13 +20,8 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.mad_project.learning.LearningRow
-import com.example.mad_project.learning.LearningViewModel
-import com.example.mad_project.navigation.HOME_GRAPH_ROUTE
-import com.example.mad_project.navigation.LEARNING_GRAPH_ROUTE
-import com.example.mad_project.navigation.RELAX_GRAPH_ROUTE
 import com.example.mad_project.navigation.Screen
 import com.example.mad_project.ui.theme.Purple500
 import com.example.mad_project.widgets.BottomBar
@@ -66,23 +56,29 @@ fun RelaxScreen(navController: NavHostController) {
 
 
 @Composable
-fun RelaxIntro(){
-    Box(modifier = Modifier
-        .padding(start = 15.dp, top = 25.dp, end = 15.dp, bottom = 15.dp)
-        .fillMaxWidth()
-        .border(BorderStroke(2.dp, Color.Gray), shape = RoundedCornerShape(10.dp))) {
+fun RelaxIntro() {
+    Box(
+        modifier = Modifier
+            .padding(start = 15.dp, top = 25.dp, end = 15.dp, bottom = 15.dp)
+            .fillMaxWidth()
+    ) {
         Text(
             buildAnnotatedString {
-            withStyle(style = ParagraphStyle(textAlign = TextAlign.Center)) {
-                append("Click on the relaxing technique to get more ")
-                withStyle(style = SpanStyle(color = Purple500)) {
-                    append("information ")
+                withStyle(
+                    style = ParagraphStyle(
+                        textAlign = TextAlign.Center,
+                        lineHeight = 30.sp
+                    )
+                ) {
+                    append("Click on the relaxing technique to get more ")
+                    withStyle(style = SpanStyle(color = Purple500)) {
+                        append("information ")
+                    }
+                    append(
+                        "about the relaxing technique you can use. Relaxing techniques can have a high benefit to our mental health during stressful learning times."
+                    )
                 }
-                append(
-                    "about the relaxing technique you can use. Relaxing techniques can have a high benefit to our mental health during stressful learning times."
-                )
-            }
-        },
+            },
             modifier = Modifier.padding(10.dp)
         )
     }

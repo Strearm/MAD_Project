@@ -12,33 +12,32 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.example.mad_project.widgets.*
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.mad_project.navigation.Screen
 import com.example.mad_project.widgets.SimpleTopAppBar
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Text
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-
+import com.example.mad_project.widgets.WebViewWrapper
+import com.example.mad_project.widgets.filterVideoUrls
 
 @Composable
-fun DetailRelaxScreen(navController: NavHostController, id: Long?, viewModel: RelaxViewModel, videoUrl: List<String>?) {
+fun DetailRelaxScreen(
+    navController: NavHostController,
+    id: Long?,
+    viewModel: RelaxViewModel,
+    videoUrl: List<String>?
+) {
     val relaxTechnique: RelaxTechnique = viewModel.filterRelaxTechnique(id.toString())
 
     val filteredVideoUrls = filterVideoUrls(relaxTechnique, getRelaxTechnique())
@@ -54,13 +53,6 @@ fun DetailRelaxScreen(navController: NavHostController, id: Long?, viewModel: Re
     val inventorExpanded = remember { mutableStateOf(false) }
     val descriptionExpanded = remember { mutableStateOf(false) }
     val bestAvoidedExpanded = remember { mutableStateOf(false) }
-    val isVideoPlaying = remember { mutableStateOf(false) }
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(if (isVideoPlaying.value) Color.Black else Color.White)
-    ) {
 
     LazyColumn {
         item {
@@ -71,38 +63,36 @@ fun DetailRelaxScreen(navController: NavHostController, id: Long?, viewModel: Re
                 Text(
                     text = relaxTechnique.title,
                     style = TextStyle(
-                        color = if (isVideoPlaying.value) Color.White else Color.Black,
-                        fontSize = 20.sp
+                        color = Color.White,
+                        fontSize = 16.sp
                     )
                 )
             }
-            Spacer(modifier = Modifier.height(16.dp)) // Abstand hinzufügen
+            Spacer(modifier = Modifier.height(16.dp))
 
             WebViewWrapper(videoUrl = currentVideoUrl.value)
 
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                 Button(
                     onClick = {
-                    if (currentVideoUrlIndex.value < shuffledVideoUrls.size - 1) {
-                        val unwatchedVideoUrls =
-                            shuffledVideoUrls.filterIndexed { index, _ -> index > currentVideoUrlIndex.value }
-                        val randomIndex = (0 until unwatchedVideoUrls.size).random()
-                        val newIndex = shuffledVideoUrls.indexOf(unwatchedVideoUrls[randomIndex])
-                        currentVideoUrlIndex.value = newIndex
-                        currentVideoUrl.value = shuffledVideoUrls[newIndex]
-                        usedVideoUrls.add(currentVideoUrl.value)
-                    } else {
-                        // Wenn alle Videos gesehen wurden, mische die Liste erneut und starte von vorne
-                        val newShuffledList = shuffledVideoUrls.shuffled()
-                        currentVideoUrlIndex.value = 0
-                        currentVideoUrl.value = newShuffledList[0]
-                        usedVideoUrls.clear()
-                        usedVideoUrls.add(currentVideoUrl.value)
-                    }
-                    navController.popBackStack()
-                    navController.navigate(route = Screen.Detail_Relax.passId(id = relaxTechnique.id))
-
-                },
+                        if (currentVideoUrlIndex.value < shuffledVideoUrls.size - 1) {
+                            val unwatchedVideoUrls =
+                                shuffledVideoUrls.filterIndexed { index, _ -> index > currentVideoUrlIndex.value }
+                            val randomIndex = (0 until unwatchedVideoUrls.size).random()
+                            val newIndex = shuffledVideoUrls.indexOf(unwatchedVideoUrls[randomIndex])
+                            currentVideoUrlIndex.value = newIndex
+                            currentVideoUrl.value = shuffledVideoUrls[newIndex]
+                            usedVideoUrls.add(currentVideoUrl.value)
+                        } else {
+                            val newShuffledList = shuffledVideoUrls.shuffled()
+                            currentVideoUrlIndex.value = 0
+                            currentVideoUrl.value = newShuffledList[0]
+                            usedVideoUrls.clear()
+                            usedVideoUrls.add(currentVideoUrl.value)
+                        }
+                        navController.popBackStack()
+                        navController.navigate(route = Screen.Detail_Relax.passId(id = relaxTechnique.id))
+                    },
                     modifier = Modifier.padding(vertical = 16.dp)
                 ) {
                     Text(text = "Change Video")
@@ -148,7 +138,7 @@ fun DetailRelaxScreen(navController: NavHostController, id: Long?, viewModel: Re
         }
     }
 }
-}
+
 @Composable
 fun ExpandableHeader(
     headerText: String,
@@ -167,16 +157,15 @@ fun ExpandableHeader(
                 imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                 contentDescription = null
             )
-            Spacer(modifier = Modifier.width(8.dp)) // Fügt einen Abstand zwischen Icon und Text hinzu
+            Spacer(modifier = Modifier.width(8.dp))
             Text(
                 text = headerText,
                 style = TextStyle(color = Color(0xFF006400), fontSize = 20.sp),
-                modifier = Modifier.weight(1f) // Nimmt den verfügbaren horizontalen Platz ein
+                modifier = Modifier.weight(1f)
             )
         }
     }
 }
-
 
 @Composable
 fun ExpandableContent(content: String, isExpanded: Boolean) {
@@ -184,11 +173,7 @@ fun ExpandableContent(content: String, isExpanded: Boolean) {
         Box(
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 8.dp)
-                .border(
-                    BorderStroke(2.dp, Color.Yellow),
-                    shape = RoundedCornerShape(10.dp)
-                )
-                .width(680.dp) // Breite anpassen
+                .width(680.dp)
         ) {
             Text(
                 text = content,
