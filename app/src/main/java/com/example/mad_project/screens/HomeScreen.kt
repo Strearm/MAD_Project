@@ -41,7 +41,7 @@ fun HomeScreen(navController: NavHostController) {
             contentDescription = "Logo",
             modifier = Modifier
                 .size(300.dp)
-                .align(Alignment.CenterHorizontally) // Hier die horizontale Ausrichtung angeben
+                .align(Alignment.CenterHorizontally)
         )
 
         Text(
@@ -51,6 +51,7 @@ fun HomeScreen(navController: NavHostController) {
                 .wrapContentHeight()
                 .wrapContentWidth(Alignment.CenterHorizontally),
             text = buildAnnotatedString {
+                append("Welcome! We are a developer team who aspires to enhanche your life-learn balance.\n")
                 withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
                     append("How to use DevelopMental:\n")
                 }
@@ -76,11 +77,7 @@ fun HomeScreen(navController: NavHostController) {
             )
         )
 
-
-
-
-
-        Scaffold(bottomBar = { BottomBar(navController = navController)}) {
+        Scaffold(bottomBar = { BottomBar(navController = navController) }) {
 
         }
     }
