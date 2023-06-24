@@ -125,7 +125,7 @@ fun DetailRelaxScreen(
                     )
 
                     ExpandableHeader(
-                        headerText = "Do not use this technique",
+                        headerText = "Talk to a doctor first with:",
                         isExpanded = bestAvoidedExpanded.value,
                         onClick = { bestAvoidedExpanded.value = !bestAvoidedExpanded.value }
                     )
