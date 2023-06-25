@@ -1,10 +1,7 @@
 package com.example.mad_project.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.vector.ImageVector
 
 const val learningId = "learningId"
@@ -14,7 +11,7 @@ const val ROOT_GRAPH_ROUTE = "root"
 const val HOME_GRAPH_ROUTE = "home"
 const val LEARNING_GRAPH_ROUTE = "learning"
 const val RELAX_GRAPH_ROUTE = "relax"
-const val TIMER_GRAPH_ROUTE = "timer"
+const val TASKS_GRAPH_ROUTE = "tasks"
 
 sealed class Screen(val route: String, val title: String, val icon: ImageVector) {
     object Home : Screen(
@@ -24,6 +21,16 @@ sealed class Screen(val route: String, val title: String, val icon: ImageVector)
     object Learning: Screen(
         route = "learning_screen",
         title = "Learning",
+        icon = Icons.Default.Edit
+    )
+    object Tasks: Screen(
+        route = "task_Screen",
+        title = "tasks",
+        icon = Icons.Default.Check
+    )
+    object addTasks: Screen(
+        route = "add_task_Screen",
+        title = "add_tasks",
         icon = Icons.Default.Edit
     )
     object Detail_Learning : Screen(route = "detail_learning_screen/{$learningId}",title = "Detail Learning", icon = Icons.Default.Edit) {

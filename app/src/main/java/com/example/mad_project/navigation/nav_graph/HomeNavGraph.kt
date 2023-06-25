@@ -8,6 +8,7 @@ import com.example.mad_project.timer.TimerScreen
 import com.example.mad_project.navigation.HOME_GRAPH_ROUTE
 import com.example.mad_project.navigation.Screen
 import com.example.mad_project.screens.HomeScreen
+import com.example.mad_project.tasks.TaskScreen
 
 fun NavGraphBuilder.homeNavGraph(
     navController: NavHostController
@@ -21,7 +22,7 @@ fun NavGraphBuilder.homeNavGraph(
         ) {
             HomeScreen(navController = navController)
         }
-        
+
         composable(
             route = Screen.Timer.route
         ){
