@@ -1,8 +1,6 @@
 package com.example.mad_project.relax
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -36,30 +34,34 @@ fun DetailRelaxScreen(
     navController: NavHostController,
     id: Long?,
     viewModel: RelaxViewModel,
-    videoUrl: List<String>?
+    videoUrl: List<String>? // do not delete
 ) {
     val relaxTechnique: RelaxTechnique = viewModel.filterRelaxTechnique(id.toString())
-
+    // filter and shuffle the video URLs
     val filteredVideoUrls = filterVideoUrls(relaxTechnique, getRelaxTechnique())
-
     val shuffledVideoUrls = remember { filteredVideoUrls.shuffled() }
+    // maintain a list of used video URLs and the current video URL index
     val usedVideoUrls = remember { mutableStateListOf<String>() }
     val currentVideoUrlIndex = rememberSaveable { mutableStateOf(0) }
+    // remember the current video URL
     val currentVideoUrl = remember {
         mutableStateOf(
             shuffledVideoUrls[currentVideoUrlIndex.value]
         )
     }
+    // remember the state of expandable sections
     val inventorExpanded = remember { mutableStateOf(false) }
     val descriptionExpanded = remember { mutableStateOf(false) }
     val bestAvoidedExpanded = remember { mutableStateOf(false) }
 
     LazyColumn {
         item {
+            // display top app bar
             SimpleTopAppBar(
                 arrowBackClicked = { navController.popBackStack() },
                 navController = navController
             ) {
+                // display title of relax technique
                 Text(
                     text = relaxTechnique.title,
                     style = TextStyle(
@@ -74,12 +76,14 @@ fun DetailRelaxScreen(
 
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                 Button(
+                    // change videoURL when button is clicked
                     onClick = {
                         if (currentVideoUrlIndex.value < shuffledVideoUrls.size - 1) {
                             val unwatchedVideoUrls =
                                 shuffledVideoUrls.filterIndexed { index, _ -> index > currentVideoUrlIndex.value }
-                            val randomIndex = (0 until unwatchedVideoUrls.size).random()
-                            val newIndex = shuffledVideoUrls.indexOf(unwatchedVideoUrls[randomIndex])
+                            val randomIndex = (unwatchedVideoUrls.indices).random()
+                            val newIndex =
+                                shuffledVideoUrls.indexOf(unwatchedVideoUrls[randomIndex])
                             currentVideoUrlIndex.value = newIndex
                             currentVideoUrl.value = shuffledVideoUrls[newIndex]
                             usedVideoUrls.add(currentVideoUrl.value)
@@ -104,6 +108,7 @@ fun DetailRelaxScreen(
                 modifier = Modifier.padding(8.dp)
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
+                    // expandable fpr the data
                     ExpandableHeader(
                         headerText = "Inventor",
                         isExpanded = inventorExpanded.value,
@@ -130,7 +135,7 @@ fun DetailRelaxScreen(
                         onClick = { bestAvoidedExpanded.value = !bestAvoidedExpanded.value }
                     )
                     ExpandableContent(
-                        content = relaxTechnique.bestAvoided,
+                        content = relaxTechnique.contraindications,
                         isExpanded = bestAvoidedExpanded.value
                     )
                 }

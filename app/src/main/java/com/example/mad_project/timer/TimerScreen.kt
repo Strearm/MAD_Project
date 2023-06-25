@@ -1,9 +1,6 @@
-package com.example.mad_project.Timer
+package com.example.mad_project.timer
 
 import android.annotation.SuppressLint
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -16,9 +13,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import com.example.mad_project.learning.LearningList
 import com.example.mad_project.widgets.BottomBar
 import com.example.mad_project.widgets.SimpleTopAppBar
 import kotlinx.coroutines.CoroutineScope

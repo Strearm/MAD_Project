@@ -5,7 +5,7 @@ data class RelaxTechnique(
     val title: String,
     val inventor: String,
     val description: String,
-    val bestAvoided: String,
+    val contraindications: String,
     val videoUrl: List<String>,
 )
 
@@ -19,7 +19,7 @@ fun getRelaxTechnique(): List<RelaxTechnique> {
             description = "Meditation is a way to calm your mind and find inner peace. By sitting quietly and focusing your attention, you can relax your body and quiet your thoughts.\n\n" +
                     "It's like giving your mind a break from all the noise and busyness of life. Through regular practice, you can feel more calm, centered, and connected with yourself.\n\n" +
                     "Meditation is a simple yet powerful tool to help you feel better and find a sense of inner stillness.",
-            bestAvoided =
+            contraindications =
             "• Extreme tiredness\n" +
                     "• Fullness a heavy meal\n" +
                     "• Flashbacks or intrusions\n" +
@@ -37,7 +37,7 @@ fun getRelaxTechnique(): List<RelaxTechnique> {
             inventor = "Edmund Jacobson (Psychiatrist)",
             description = "Progressive Muscle Relaxation (PMR) is a technique that involves deliberately tensing and then releasing different muscle groups in your body. By intentionally tensing the muscles and then letting go, you become more aware of the sensations of tension and relaxation." +
                     "PMR helps you achieve a state of calm concentration. Incorporate PMR into your routine for optimal learning and academic success.",
-            bestAvoided =
+            contraindications =
             "• Musculoskeletal injuries or conditions\n" +
                     "• Acute or chronic pain\n" +
                     "• Cardiovascular disorders\n" +
@@ -70,7 +70,7 @@ fun getRelaxTechnique(): List<RelaxTechnique> {
                     "By using self-suggestions and visualizations, it aims to induce a state of deep relaxation and reduce stress. " +
                     "Practitioners learn to focus on specific bodily sensations, such as warmth or heaviness, and use affirmations to promote relaxation and well-being.\n" +
                     "Crush exam anxiety, absorb knowledge, and unlock your true learning potential.\n",
-            bestAvoided = "• Severe cognitive impairments\n" +
+            contraindications = "• Severe cognitive impairments\n" +
                     "• Uncontrolled high blood pressure\n" +
                     "• Epilepsy or history of seizures\n" +
                     "• Acute psychosis\n" +

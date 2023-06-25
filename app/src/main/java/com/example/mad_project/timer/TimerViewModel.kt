@@ -1,4 +1,4 @@
-package com.example.mad_project.Timer
+package com.example.mad_project.timer
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
