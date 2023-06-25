@@ -61,7 +61,7 @@ fun HomeScreen(navController: NavHostController) {
                 withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
                     append("3. ")
                 }
-                append("Go to 'Relax' to choose a relaxing technique\n")
+                append("After the time has passed go to 'Relax' to choose a relaxing technique\n")
                 append("Repeat until you finished your session\n")
                 append("Optional: Begin with a relaxing technique")
             },
