@@ -1,9 +1,6 @@
 package com.example.mad_project.Timer
 
 import android.annotation.SuppressLint
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -12,13 +9,13 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import com.example.mad_project.learning.LearningList
 import com.example.mad_project.widgets.BottomBar
 import com.example.mad_project.widgets.SimpleTopAppBar
 import kotlinx.coroutines.CoroutineScope
@@ -86,7 +83,7 @@ fun Clock(hour: String, minute: String, second: String) {
     var hours = hour.ifEmpty { "00" }
     var minutes = minute.ifEmpty { "00" }
     var seconds = second.ifEmpty { "00" }
-    Text(text = "$hours : $minutes : $seconds")
+    Text(text = "$hours : $minutes : $seconds", fontSize = 30.sp, fontWeight = FontWeight.Bold)
 }
 
 @Composable

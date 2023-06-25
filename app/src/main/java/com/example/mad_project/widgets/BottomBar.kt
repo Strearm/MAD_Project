@@ -14,10 +14,11 @@ import com.example.mad_project.navigation.Screen
 @Composable
 fun BottomBar(navController: NavHostController) {
     val screens = listOf(
-        Screen.Home,
         Screen.Learning,
         Screen.Relax,
-        Screen.Timer
+        Screen.Home,
+        Screen.Timer,
+        Screen.Tasks
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination

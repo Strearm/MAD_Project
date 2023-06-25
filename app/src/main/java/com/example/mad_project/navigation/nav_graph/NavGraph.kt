@@ -9,6 +9,7 @@ import com.example.mad_project.learning.*
 import com.example.mad_project.navigation.HOME_GRAPH_ROUTE
 import com.example.mad_project.navigation.ROOT_GRAPH_ROUTE
 import com.example.mad_project.relax.relaxNavGraph
+import com.example.mad_project.tasks.taskNavGraph
 
 @Composable
 fun SetupNavGraph(
@@ -23,6 +24,8 @@ fun SetupNavGraph(
     ){
         homeNavGraph(navController = navController)
         relaxNavGraph(navController = navController)
+        taskNavGraph(navController = navController)
         learningNavGraph(navController = navController, learningViewModel = learningViewModel)
+
     }
 }
