@@ -13,6 +13,9 @@ class TimerViewModel : ViewModel() {
     private var _buttonState = MutableStateFlow(false)
     val buttonState = _buttonState.asStateFlow()
 
+    private var _inputEnabled = MutableStateFlow(false)
+    val inputEnabled = _inputEnabled.asStateFlow()
+
     private var _hours = MutableStateFlow("00")
     val hours = _hours.asStateFlow()
 
@@ -28,6 +31,12 @@ class TimerViewModel : ViewModel() {
 
     //region FUNCTIONS
 
+    fun disableInput(){
+        _inputEnabled.value = true
+    }
+    fun enableInput(){
+        _inputEnabled.value = false
+    }
     fun toggleStart() {
         _buttonState.value = !_buttonState.value
     }
