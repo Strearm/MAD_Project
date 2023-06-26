@@ -169,7 +169,7 @@ fun ButtonRow(
     }
 
     Row() {
-        if (showPauseContinueButton.value) {
+        if (showPauseContinueButton.value && timerViewModel.checkFinished()) {
             Button(
                 modifier = Modifier
                     .weight(1f)
